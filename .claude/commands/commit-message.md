@@ -3,16 +3,17 @@ description: Create  a commit message by analyaing git diffs
 allowed-tools: Bash(git status:*), Bash(git diff --staged), Bash(git commit:*)
 ---
 
+## Context:
+
+- Current git status: !`git status`
+- Current git diff: !`git diff --staged`
+
 ## Your task:
 
 Analyze above staged git changes and create a commit message. Use present tense and explain 'why' something has been changed, not just 'what' has been changed.
 
 ## Run these commands:
 
-```bash
-git status
-git diff --staged
-```
 
 ## Format:
 Use the following format for making the commit message:
