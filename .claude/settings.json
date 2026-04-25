@@ -5,5 +5,18 @@
       "Bash(git init)",
       "Bash(git switch:*)"
     ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo \"hello\""
+          }
+        ]
+      }
+    ]
   }
 }
