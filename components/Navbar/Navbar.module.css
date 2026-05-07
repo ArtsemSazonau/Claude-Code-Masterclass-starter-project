@@ -15,3 +15,8 @@
 svg.logo {
   display: inline-block;
 }
+
+.cta {
+  @apply h-10 rounded-[10px] px-4 inline-flex items-center gap-2 text-heading font-medium transition hover:brightness-110;
+  background: linear-gradient(90deg, #9810FA 0%, #E60076 100%);
+}

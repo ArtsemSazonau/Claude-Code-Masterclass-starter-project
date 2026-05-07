@@ -84,3 +84,7 @@ The home page (`app/(public)/page.tsx`) acts as a router: logged-in users go to 
 - Use the `git switch -c` command to switch to a new branch, not `git checkout`.
 - Use minimal project dependencies where possible.
 - A PostToolUse hook auto-runs Prettier on any `.ts`/`.tsx` file after Write or Edit — do not manually reformat these files.
+
+## Checking Documentation
+
+- **important:** When implementing any lib/famework-specific features, ALWAYS check the appropriate lib/framework documentation using the Context7 MCP server before writing any code.
