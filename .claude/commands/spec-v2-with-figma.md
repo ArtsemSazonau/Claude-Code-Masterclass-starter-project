@@ -15,6 +15,7 @@ Your job will be to turn the user input above into:
 - A human friendly feature title in kebab-case (e.g. new-heist-form)
 - A safe git branch name not already taken (e.g. claude/feature/new-heist-form)
 - A detailed markdown spec file under the _specs/ directory
+- An optional figma design note, if a figma design link present
 
 Then save the spec file to disk and print a short summary of what you did.
 
