@@ -1,0 +1,5 @@
+@reference "../../app/globals.css";
+
+.center {
+  @apply flex items-center justify-center;
+}
