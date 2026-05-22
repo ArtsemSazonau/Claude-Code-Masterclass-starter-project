@@ -2,12 +2,29 @@
 
 import { useRef, useState } from "react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth"
+import { doc, setDoc } from "firebase/firestore"
+import { auth, db } from "@/lib/firebase"
+import { generateCodename } from "@/lib/codename"
 import styles from "./SignupForm.module.css"
 
+function mapFirebaseError(err: unknown): string {
+  if (typeof err === "object" && err !== null && "code" in err) {
+    const code = (err as { code: unknown }).code
+    if (code === "auth/email-already-in-use") return "That email is already registered."
+    if (code === "auth/weak-password") return "Password is too weak."
+  }
+  return "Something went wrong. Please try again."
+}
+
 export default function SignupForm() {
+  const router = useRouter()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState("")
   const confirmRef = useRef<HTMLInputElement>(null)
 
   function checkMatch(pw: string, confirm: string) {
@@ -26,9 +43,24 @@ export default function SignupForm() {
     e.target.setCustomValidity(checkMatch(password, value))
   }
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    console.log("signup", { email, password })
+    setError("")
+    setIsLoading(true)
+    try {
+      const { user } = await createUserWithEmailAndPassword(auth, email, password)
+      const codename = generateCodename()
+      await updateProfile(user, { displayName: codename })
+      try {
+        await setDoc(doc(db, "users", user.uid), { id: user.uid, codename })
+      } catch (firestoreErr) {
+        console.error("Failed to write user document", firestoreErr)
+      }
+      router.replace("/heists")
+    } catch (err) {
+      setError(mapFirebaseError(err))
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -69,8 +101,14 @@ export default function SignupForm() {
         onChange={handleConfirmChange}
       />
 
-      <button type="submit" className="btn">
-        Sign up
+      {error && (
+        <p role="alert" className={styles.error}>
+          {error}
+        </p>
+      )}
+
+      <button type="submit" className="btn" disabled={isLoading}>
+        {isLoading ? "Signing up…" : "Sign up"}
       </button>
 
       <p className={styles.crossLink}>
