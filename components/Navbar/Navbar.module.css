@@ -12,6 +12,10 @@
   @apply font-bold text-xl;
 }
 
+.siteNav ul {
+  @apply flex items-center gap-3;
+}
+
 svg.logo {
   display: inline-block;
 }
@@ -19,4 +23,9 @@ svg.logo {
 .cta {
   @apply h-10 rounded-[10px] px-4 inline-flex items-center gap-2 text-heading font-medium transition hover:brightness-110;
   background: linear-gradient(90deg, #9810FA 0%, #E60076 100%);
+}
+
+.logout {
+  @apply h-10 rounded-[10px] px-4 inline-flex items-center gap-2 text-heading font-medium transition hover:brightness-110 cursor-pointer;
+  background: #B91C1C;
 }
