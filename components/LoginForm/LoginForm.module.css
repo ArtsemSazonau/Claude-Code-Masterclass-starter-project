@@ -12,6 +12,15 @@
   @apply bg-lighter text-heading rounded-md px-3 py-2 border border-transparent focus:border-primary focus:outline-none invalid:border-error;
 }
 
+.error {
+  @apply text-sm text-error;
+}
+
+.success {
+  @apply text-sm;
+  color: var(--color-success);
+}
+
 .crossLink {
   @apply text-sm text-body text-center mt-2;
 }
