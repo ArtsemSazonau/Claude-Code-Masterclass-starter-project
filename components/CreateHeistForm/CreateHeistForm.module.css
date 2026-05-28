@@ -1,0 +1,31 @@
+@reference "../../app/globals.css";
+
+.form {
+  @apply flex flex-col gap-4 max-w-md mx-auto bg-light p-6 rounded-xl;
+}
+
+.form label {
+  @apply text-sm font-medium text-heading;
+}
+
+.form input,
+.form textarea,
+.form select {
+  @apply bg-lighter text-heading rounded-md px-3 py-2 border border-transparent focus:border-primary focus:outline-none invalid:border-error;
+}
+
+.form textarea {
+  @apply resize-y min-h-24;
+}
+
+.error {
+  @apply text-sm text-error;
+}
+
+.statusWrap {
+  @apply flex justify-center p-6;
+}
+
+.emptyState {
+  @apply text-center text-body bg-light p-6 rounded-xl max-w-md mx-auto;
+}
