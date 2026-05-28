@@ -7,6 +7,7 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth"
 import { doc, setDoc } from "firebase/firestore"
 import { auth, db } from "@/lib/firebase"
 import { generateCodename } from "@/lib/codename"
+import { COLLECTIONS } from "@/types/firestore"
 import styles from "./SignupForm.module.css"
 
 function mapFirebaseError(err: unknown): string {
@@ -52,7 +53,7 @@ export default function SignupForm() {
       const codename = generateCodename()
       await updateProfile(user, { displayName: codename })
       try {
-        await setDoc(doc(db, "users", user.uid), { id: user.uid, codename })
+        await setDoc(doc(db, COLLECTIONS.USERS, user.uid), { id: user.uid, codename })
       } catch (firestoreErr) {
         console.error("Failed to write user document", firestoreErr)
       }
