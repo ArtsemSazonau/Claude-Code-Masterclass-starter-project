@@ -1,0 +1,374 @@
+/* Splash / welcome page — heist dossier aesthetic */
+
+.splash {
+  position: relative;
+  min-height: 100lvh;
+  overflow: hidden;
+  isolation: isolate;
+  padding: 1.5rem clamp(1rem, 4vw, 4rem) 4rem;
+  color: var(--color-body);
+}
+
+/* ---------- background layers ---------- */
+
+.grid {
+  position: absolute;
+  inset: -2px;
+  z-index: -3;
+  background-image:
+    linear-gradient(rgba(194, 122, 255, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(194, 122, 255, 0.07) 1px, transparent 1px);
+  background-size: 64px 64px;
+  background-position: center;
+  mask-image: radial-gradient(ellipse 85% 70% at 50% 38%, black 25%, transparent 78%);
+  -webkit-mask-image: radial-gradient(ellipse 85% 70% at 50% 38%, black 25%, transparent 78%);
+}
+
+.glow {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(circle 620px at 14% 12%, rgba(194, 122, 255, 0.28), transparent 60%),
+    radial-gradient(circle 760px at 92% 96%, rgba(251, 100, 182, 0.22), transparent 65%);
+  filter: blur(4px);
+}
+
+.vignette {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse 100% 80% at 50% 50%, transparent 38%, rgba(3, 7, 18, 0.65) 100%);
+  pointer-events: none;
+}
+
+/* ---------- top dossier strip ---------- */
+
+.dossier {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  color: rgba(153, 161, 175, 0.85);
+  border-top: 1px solid rgba(194, 122, 255, 0.18);
+  border-bottom: 1px solid rgba(194, 122, 255, 0.18);
+  padding: 0.7rem 0.25rem;
+  margin-bottom: clamp(3rem, 8vw, 6rem);
+  opacity: 0;
+  animation: rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) 0.05s forwards;
+}
+
+.dossierMid {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.stamp {
+  color: var(--color-error);
+  border: 2px solid var(--color-error);
+  padding: 0.3rem 0.7rem;
+  border-radius: 3px;
+  transform: rotate(-7deg);
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  font-size: 0.72rem;
+  opacity: 0.92;
+  position: relative;
+  box-shadow: inset 0 0 0 1px rgba(255, 100, 103, 0.1);
+}
+
+.stamp::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 3px;
+  background:
+    radial-gradient(circle at 30% 20%, transparent 60%, rgba(3, 7, 18, 0.4)),
+    radial-gradient(circle at 80% 90%, transparent 70%, rgba(3, 7, 18, 0.35));
+  pointer-events: none;
+}
+
+.dossierHide {
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .dossierHide {
+    display: inline;
+  }
+}
+
+/* ---------- hero ---------- */
+
+.hero {
+  max-width: 84rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 0.72rem;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  margin: 0 0 1.5rem;
+  opacity: 0;
+  animation: rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) 0.2s forwards;
+}
+
+.kickerIcon {
+  width: 0.95rem;
+  height: 0.95rem;
+  color: var(--color-secondary);
+  transform: rotate(-12deg);
+}
+
+.splash .title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(3.75rem, 14vw, 12rem);
+  line-height: 0.84;
+  letter-spacing: -0.015em;
+  color: var(--color-heading);
+  text-transform: uppercase;
+  margin: 0;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0;
+  opacity: 0;
+  animation: rise 1s cubic-bezier(0.2, 0.7, 0.2, 1) 0.3s forwards;
+  filter: drop-shadow(0 8px 40px rgba(194, 122, 255, 0.15));
+}
+
+.titleClock {
+  width: 0.76em;
+  height: 0.76em;
+  display: inline-block;
+  vertical-align: -0.06em;
+  color: var(--color-primary);
+  animation: spin 60s linear infinite;
+  filter: drop-shadow(0 0 22px rgba(194, 122, 255, 0.6));
+  flex-shrink: 0;
+}
+
+.tagline {
+  font-family: var(--font-sans);
+  font-style: italic;
+  font-size: clamp(1.05rem, 2vw, 1.4rem);
+  line-height: 1.4;
+  color: var(--color-body);
+  margin: 1.5rem 0 0;
+  opacity: 0;
+  animation: rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) 0.5s forwards;
+}
+
+.taglineEm {
+  color: var(--color-secondary);
+  font-weight: 600;
+  font-style: italic;
+}
+
+/* ---------- CTAs ---------- */
+
+.ctaRow {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1.25rem 2rem;
+  margin-top: 2.75rem;
+  opacity: 0;
+  animation: rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) 0.65s forwards;
+}
+
+.ctaPrimary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  background: var(--color-primary);
+  color: var(--color-dark);
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+  padding: 1rem 2rem;
+  border-radius: 999px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 12px 40px -10px rgba(194, 122, 255, 0.55);
+}
+
+.ctaPrimary:hover {
+  background: var(--color-secondary);
+  transform: translateY(-2px);
+  box-shadow: 0 16px 50px -10px rgba(251, 100, 182, 0.65);
+}
+
+.ctaArrow {
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.ctaPrimary:hover .ctaArrow {
+  transform: translateX(5px);
+}
+
+.ctaGhost {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  color: var(--color-body);
+  letter-spacing: 0.01em;
+  transition: color 0.2s ease;
+}
+
+.ctaGhost:hover {
+  color: var(--color-heading);
+}
+
+.ctaGhostLink {
+  color: var(--color-heading);
+  text-decoration: underline;
+  text-decoration-color: rgba(194, 122, 255, 0.6);
+  text-underline-offset: 5px;
+  text-decoration-thickness: 2px;
+  transition: text-decoration-color 0.2s ease;
+}
+
+.ctaGhost:hover .ctaGhostLink {
+  text-decoration-color: var(--color-secondary);
+}
+
+/* ---------- mission cards ---------- */
+
+.cards {
+  margin: clamp(4rem, 9vw, 7rem) auto 0;
+  max-width: 78rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.25rem;
+}
+
+.card {
+  position: relative;
+  padding: 1.75rem 1.5rem 1.6rem;
+  background:
+    linear-gradient(180deg, rgba(16, 24, 40, 0.7), rgba(10, 16, 29, 0.5));
+  border: 1px solid rgba(194, 122, 255, 0.16);
+  border-radius: 14px;
+  overflow: hidden;
+  opacity: 0;
+  animation: rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+  transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+}
+
+.card:nth-child(1) { animation-delay: 0.85s; }
+.card:nth-child(2) { animation-delay: 0.95s; }
+.card:nth-child(3) { animation-delay: 1.05s; }
+
+.card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(251, 100, 182, 0.42);
+  background:
+    linear-gradient(180deg, rgba(16, 24, 40, 0.85), rgba(10, 16, 29, 0.6));
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(225deg, rgba(194, 122, 255, 0.35) 50%, transparent 50%);
+}
+
+.cardNum {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.3em;
+  color: var(--color-primary);
+}
+
+.cardIcon {
+  width: 1.85rem;
+  height: 1.85rem;
+  color: var(--color-secondary);
+  margin: 1rem 0 1.1rem;
+}
+
+.cardTitle {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.65rem;
+  letter-spacing: 0.025em;
+  text-transform: uppercase;
+  color: var(--color-heading);
+  margin: 0 0 0.45rem;
+  line-height: 1;
+}
+
+.cardCopy {
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: var(--color-body);
+  margin: 0;
+}
+
+/* ---------- footer strip ---------- */
+
+.footer {
+  position: relative;
+  margin: clamp(3.5rem, 7vw, 5.5rem) auto 0;
+  padding-top: 1rem;
+  border-top: 1px dashed rgba(194, 122, 255, 0.16);
+  text-align: center;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  color: rgba(153, 161, 175, 0.55);
+  opacity: 0;
+  animation: rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) 1.2s forwards;
+}
+
+/* ---------- keyframes ---------- */
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dossier,
+  .kicker,
+  .splash .title,
+  .tagline,
+  .ctaRow,
+  .card,
+  .footer {
+    animation-duration: 0.001s;
+    opacity: 1;
+    transform: none;
+  }
+  .titleClock {
+    animation: none;
+  }
+}
