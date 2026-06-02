@@ -60,7 +60,7 @@ If you cannot infer a sensible `feature_title` and `feature_slug`, ask the user 
 
 If `figma_hint` is present and Figma MCP tools are available:
 
-Use the **figma-design-extractor** subagent to provide a design guide for the feature, citing the `figma hint` and tell it to:
+Use the **figma-design-extractor-v1** subagent to provide a design guide for the feature, citing the `figma hint` and tell it to:
 
 1. Extract only information that is useful for implementation, such as:  
    - Dimensions and layout (grid, spacing, alignment)  
